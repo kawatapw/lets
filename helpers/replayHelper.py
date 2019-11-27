@@ -21,8 +21,8 @@ def toDotTicks(unixTime):
 	return (10000000*unixTime) + 621355968000000000
 
 
-def _getRawReplayFailedLocal(scoreID):
-	with open(os.path.join(glob.conf["FAILED_REPLAYS_FOLDER"], "replay_{}.osr".format(scoreID)), "rb") as f:
+def _getRawReplayLocal(scoreID):
+	with open(os.path.join(glob.conf["REPLAYS_FOLDER"], "replay_{}.osr".format(scoreID)), "rb") as f:
 		return f.read()
 
 
@@ -30,8 +30,8 @@ def _getRawReplayFailedLocal(scoreID):
 def getRawReplayS3(scoreID):
 	scoreID = int(scoreID)
 	if not glob.conf.s3_enabled:
-		log.warning("S3 is disabled! Using failed local")
-		return _getRawReplayFailedLocal(scoreID)
+		log.warning("S3 is disabled! Using local")
+		return _getRawReplayLocal(scoreID)
 
 	fileName = "replay_{}.osr".format(scoreID)
 	log.debug("Downloading {} from s3".format(fileName))

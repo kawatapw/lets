@@ -123,7 +123,6 @@ if __name__ == "__main__":
 			".data/catch_the_pp",
 			glob.conf["BEATMAPS_FOLDER"],
 			glob.conf["SCREENSHOTS_FOLDER"],
-			glob.conf["FAILED_REPLAYS_FOLDER"],
 			glob.conf["REPLAYS_FOLDER"]
 		)
 		for i in paths:

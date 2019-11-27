@@ -50,8 +50,6 @@ class Config:
 			"S3_REGION": config("S3_REGION", default="fr-par"),
 			"S3_ACCESS_KEY_ID": config("S3_ACCESS_KEY_ID", default=""),
 			"S3_SECRET_ACCESS_KEY": config("S3_SECRET_ACCESS_KEY", default=""),
-
-			"FAILED_REPLAYS_FOLDER": config("FAILED_REPLAYS_FOLDER", default=".data/failed_replays")
 		}
 
 	@property
