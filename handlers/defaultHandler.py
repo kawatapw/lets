@@ -43,8 +43,8 @@ class handler(requestsManager.asyncRequestHandler):
 					<body>
 						<div class = "main">
 							<div class = "wrapper">
-								<a href="https://ripple.moe"><img src="http://y.zxq.co/ufaibw.png"></a>
-								<h3>Howdy, you're still connected to Ripple!</h3>
+								<a href="https://kawata.pw"><img src="https://kawata.pw/static/logos/logo.png"></a>
+								<h3>Howdy, you're still connected to Kawata!</h3>
 								You can't access osu!'s website if the Server Switcher is On.<br>
 								Please open the <b>Server Switcher</b> and click <b>On/Off</b> to switch server, then refresh this page.
 								<h4>If you still can't access osu! website even if the switcher is Off, <a href="http://www.refreshyourcache.com/" target="_blank">clean your browser cache</a>.</h4>

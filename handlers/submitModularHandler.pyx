@@ -482,7 +482,7 @@ class handler(requestsManager.asyncRequestHandler):
 
 				# send message to #announce if we're rank #1
 				if newScoreboard.personalBestRank == 1 and s.completed == 3 and not restricted:
-					annmsg = "[https://ripple.moe/?u={} {}] achieved rank #1 on [https://osu.ppy.sh/b/{} {}] ({})".format(
+					annmsg = "[https://kawata.pw/?u={} {}] achieved rank #1 on [https://osu.ppy.sh/b/{} {}] ({})".format(
 						userID,
 						username.encode().decode("ASCII", "ignore"),
 						beatmapInfo.beatmapID,
