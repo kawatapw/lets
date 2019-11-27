@@ -32,7 +32,6 @@ from objects import glob
 from objects import score
 from objects import scoreboard
 from objects.charts import BeatmapChart, OverallChart
-from secret import butterCake
 
 MODULE_NAME = "submit_modular"
 class handler(requestsManager.asyncRequestHandler):
@@ -269,10 +268,6 @@ class handler(requestsManager.asyncRequestHandler):
 					or ((s.mods & mods.SUDDENDEATH) > 0 and (s.mods & mods.NOFAIL) > 0):
 				userUtils.ban(userID)
 				userUtils.appendNotes(userID, "Impossible mod combination {} (score submitter)".format(s.mods))
-
-			# NOTE: Process logging was removed from the client starting from 20180322
-			if s.completed == 3 and "pl" in self.request.arguments:
-				butterCake.bake(self, s)
 
 			# Save replay for all passed scores
 			# Make sure the score has an id as well (duplicated?, query error?)
