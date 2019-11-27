@@ -22,7 +22,6 @@ from common.db import dbConnector
 from common.ddog import datadogClient
 from common.log import logUtils as log
 from common.redis import pubSub
-from common.web import schiavo
 from handlers import apiCacheBeatmapHandler, rateHandler, changelogHandler
 from handlers import apiPPHandler
 from handlers import apiStatusHandler
@@ -227,12 +226,6 @@ if __name__ == "__main__":
 				)
 				sys.exit()
 
-		# Discord
-		if glob.conf.schiavo_enabled:
-			glob.schiavo = schiavo.schiavo(glob.conf["SCHIAVO_URL"], "**lets**")
-		else:
-			logging.warning("Schiavo logging is disabled!")
-
 		# Server port
 		try:
 			if cli_args.port:
@@ -282,7 +275,6 @@ if __name__ == "__main__":
 			glob.conf["HTTP_HOST"],
 			glob.serverPort
 		))
-		log.discord("bunker", "Server started!")
 
 		# Start Tornado
 		def term(_, __):

@@ -3,7 +3,6 @@ from collections import defaultdict
 import personalBestCache
 import userStatsCache
 from common.files import fileBuffer, fileLocks
-from common.web import schiavo
 import helpers.s3
 import helpers.threadScope
 from helpers.aqlHelper import AqlThresholds
@@ -33,7 +32,6 @@ personalBestCache = personalBestCache.personalBestCache()
 fileBuffers = fileBuffer.buffersList()
 # dog = datadogClient.datadogClient()
 dog = None
-schiavo = schiavo.schiavo()
 achievementClasses = {}
 aqlThresholds = AqlThresholds()
 serverPort = None

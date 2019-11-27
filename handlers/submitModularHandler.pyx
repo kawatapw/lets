@@ -539,7 +539,6 @@ class handler(requestsManager.asyncRequestHandler):
 			# Once we are sure that this error doesn't get triggered when it
 			# shouldn't (eg: bancho restart), we'll ban users that submit
 			# scores without an active bancho session.
-			# We only log through schiavo atm (see exceptions.py).
 			self.set_status(408)
 			self.write("error: pass")
 		except:

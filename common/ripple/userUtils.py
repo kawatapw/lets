@@ -998,7 +998,7 @@ def verifyUser(userID, hashes):
 	# Make sure there are no other accounts activated with this exact mac/unique id/hwid
 	if hashes[2] == "b4ec3c4334a0249dae95c284ec5983df" or hashes[4] == "ffae06fb022871fe9beb58b005c5e21d":
 		# Running under wine, check only by uniqueid
-		log.info("{user} ({userID}) ha triggerato Sannino:\n**Full data:** {hashes}\n**Usual wine mac address hash:** b4ec3c4334a0249dae95c284ec5983df\n**Usual wine disk id:** ffae06fb022871fe9beb58b005c5e21d".format(user=username, userID=userID, hashes=hashes), "bunker")
+		log.info("{user} ({userID}) ha triggerato Sannino:\n**Full data:** {hashes}\n**Usual wine mac address hash:** b4ec3c4334a0249dae95c284ec5983df\n**Usual wine disk id:** ffae06fb022871fe9beb58b005c5e21d".format(user=username, userID=userID, hashes=hashes))
 		log.debug("Veryfing with Linux/Mac hardware")
 		match = glob.db.fetchAll("SELECT userid FROM hw_user WHERE unique_id = %(uid)s AND userid != %(userid)s AND activated = 1 LIMIT 1", {
 			"uid": hashes[3],
@@ -1028,18 +1028,6 @@ def verifyUser(userID, hashes):
 
 		# Restrict the original
 		restrict(originalUserID)
-
-		# Discord message
-		log.cm(
-			"User **{originalUsername}** ({originalUserID}) has been restricted because "
-			"they have created multiaccount **{username}** ({userID}). "
-			"The multiaccount has been banned.".format(
-				originalUsername=originalUsername,
-				originalUserID=originalUserID,
-				username=username,
-				userID=userID
-			)
-		)
 
 		# Disallow login
 		return False

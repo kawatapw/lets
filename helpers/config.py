@@ -44,9 +44,6 @@ class Config:
 
 			"CHEESEGULL_API_URL": config("CHEESEGULL_API_URL", default="http://cheesegu.ll/api"),
 
-			"SCHIAVO_URL": config("SCHIAVO_URL", default=""),
-			"DISCORD_SECRET_WEB_HOOK": config("DISCORD_SECRET_WEB_HOOK", default=""),
-
 			"CONO_ENABLE": config("CONO_ENABLE", default="0", cast=bool),
 
 			"FOKABOT_API_BASE": config("FOKABOT_API_BASE", default="http://127.0.0.1:4334"),
@@ -67,10 +64,6 @@ class Config:
 	@property
 	def datadog_enabled(self):
 		return bool(self["DATADOG_API_KEY"]) and bool(self["DATADOG_APP_KEY"])
-
-	@property
-	def schiavo_enabled(self):
-		return bool(self["SCHIAVO_URL"])
 
 	@property
 	def s3_enabled(self):
