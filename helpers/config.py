@@ -46,9 +46,6 @@ class Config:
 
 			"CONO_ENABLE": config("CONO_ENABLE", default="0", cast=bool),
 
-			"FOKABOT_API_BASE": config("FOKABOT_API_BASE", default="http://127.0.0.1:4334"),
-			"FOKABOT_API_SECRET": config("FOKABOT_API_SECRET", default=""),
-
 			"S3_ENDPOINT_URL": config("S3_ENDPOINT_URL", default="https://s3.fr-par.scw.cloud"),
 			"S3_REGION": config("S3_REGION", default="fr-par"),
 			"S3_ACCESS_KEY_ID": config("S3_ACCESS_KEY_ID", default=""),
