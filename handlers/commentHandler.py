@@ -44,6 +44,8 @@ class handler(requestsManager.asyncRequestHandler):
 				self.write(self._getComments())
 			elif action == "post":
 				self._addComment()
+		except (exceptions.loginFailedException, exceptions.userBannedException):
+			self.write("error: no")
 
 	@staticmethod
 	def clientWho(y):
