@@ -56,6 +56,9 @@ class db:
 				except:
 					pass
 
+				if attempts > 10:
+					break
+
 				# Sleep if necessary
 				if attempts > 0:
 					time.sleep(1)
