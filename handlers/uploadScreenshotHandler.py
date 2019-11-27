@@ -40,8 +40,6 @@ class handler(requestsManager.asyncRequestHandler):
 			userID = userUtils.getID(username)
 			if not userUtils.checkLogin(userID, password):
 				raise exceptions.loginFailedException(MODULE_NAME, username)
-			if userUtils.check2FA(userID, ip):
-				raise exceptions.need2FAException(MODULE_NAME, username, ip)
 
 			# Rate limit
 			if glob.redis.get("lets:screenshot:{}".format(userID)) is not None:
@@ -66,8 +64,6 @@ class handler(requestsManager.asyncRequestHandler):
 
 			# Return screenshot link
 			self.write("{}/ss/{}.jpg".format(glob.conf["SERVER_URL"], screenshotID))
-		except exceptions.need2FAException:
-			pass
 		except exceptions.invalidArgumentsException:
 			pass
 		except exceptions.loginFailedException:

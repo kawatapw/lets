@@ -48,10 +48,6 @@ class handler(requestsManager.asyncRequestHandler):
 			if userUtils.isLocked(userID):
 				raise exceptions.userLockedException(MODULE_NAME, username)
 
-			# 2FA check
-			if userUtils.check2FA(userID, ip):
-				raise exceptions.need2FAException(MODULE_NAME, username, ip)
-
 			# Update latest activity
 			userUtils.updateLatestActivity(userID)
 
@@ -66,5 +62,3 @@ class handler(requestsManager.asyncRequestHandler):
 			pass
 		except exceptions.userLockedException:
 			pass
-		except exceptions.need2FAException:
-			self.write("error: verify\n")

@@ -39,10 +39,6 @@ class beatmapTooLongException(Exception):
 	def __init__(self, handler):
 		log.warning("{} - Requested beatmap is too long.".format(handler))
 
-class need2FAException(Exception):
-	def __init__(self, handler, who, ip):
-		log.warning("{} - 2FA check needed for user {} ({})".format(handler, who, ip))
-
 class noAPIDataError(Exception):
 	pass
 

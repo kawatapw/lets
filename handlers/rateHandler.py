@@ -31,8 +31,6 @@ class handler(requestsManager.asyncRequestHandler):
 				raise exceptions.loginFailedException(MODULE_NAME, user_id)
 			if not userUtils.checkLogin(user_id, password, ip):
 				raise exceptions.loginFailedException(MODULE_NAME, username)
-			if userUtils.check2FA(user_id, ip):
-				raise exceptions.need2FAException(MODULE_NAME, user_id, ip)
 
 			ranked = glob.db.fetch(
 				"SELECT ranked FROM beatmaps WHERE beatmap_md5 = %s LIMIT 1",

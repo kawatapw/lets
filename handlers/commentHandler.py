@@ -36,8 +36,6 @@ class handler(requestsManager.asyncRequestHandler):
 				raise exceptions.loginFailedException(MODULE_NAME, userID)
 			if not userUtils.checkLogin(userID, password, ip):
 				raise exceptions.loginFailedException(MODULE_NAME, username)
-			if userUtils.check2FA(userID, ip):
-				raise exceptions.need2FAException(MODULE_NAME, userID, ip)
 			if userUtils.isBanned(userID):
 				raise exceptions.userBannedException(MODULE_NAME, username)
 
@@ -46,8 +44,6 @@ class handler(requestsManager.asyncRequestHandler):
 				self.write(self._getComments())
 			elif action == "post":
 				self._addComment()
-		except (exceptions.loginFailedException, exceptions.need2FAException, exceptions.userBannedException):
-			self.write("error: no")
 
 	@staticmethod
 	def clientWho(y):

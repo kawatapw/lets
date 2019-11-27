@@ -56,8 +56,6 @@ class handler(requestsManager.asyncRequestHandler):
 				raise exceptions.loginFailedException(MODULE_NAME, userID)
 			if not userUtils.checkLogin(userID, password, ip):
 				raise exceptions.loginFailedException(MODULE_NAME, username)
-			if userUtils.check2FA(userID, ip):
-				raise exceptions.need2FAException(MODULE_NAME, username, ip)
 			# Ban check is pointless here, since there's no message on the client
 			#if userHelper.isBanned(userID) == True:
 			#	raise exceptions.userBannedException(MODULE_NAME, username)
@@ -120,8 +118,6 @@ class handler(requestsManager.asyncRequestHandler):
 
 			# Datadog stats
 			glob.dog.increment(glob.DATADOG_PREFIX+".served_leaderboards")
-		except exceptions.need2FAException:
-			self.write("error: 2fa")
 		except exceptions.invalidArgumentsException:
 			self.write("error: meme")
 		except exceptions.userBannedException:
