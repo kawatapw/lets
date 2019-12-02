@@ -236,43 +236,37 @@ class score:
 			self.completed = 0
 			if not scoreUtils.isRankable(self.mods):
 				return
-			# No duplicates found.
-			# Get right "completed" value
-			personalBest = glob.db.fetch("SELECT id, score, pp FROM scores WHERE userid = %s AND beatmap_md5 = %s AND play_mode = %s AND completed = 3 LIMIT 1", [userID, self.fileMd5, self.gameMode])
-			if personalBest is None:
-				# This is our first score on this map, so it's our best score
-				self.completed = 3
-				self.rankedScoreIncrease = self.score
-				self.oldPersonalBest = 0
-				self.personalOldBestScore = None
-			else:
-				self.personalOldBestScore = personalBest["id"]
-				# Compare personal best's score with current score
-				# idk but my version is not work or something goes wrong ;d
-				# let's try akatsuki version ;d
+			if self.passed:
+				# Get userID
+				userID = userUtils.getID(self.playerName)
 
-				if b.rankedStatus == rankedStatuses.RANKED or b.rankedStatus == rankedStatuses.APPROVED:
-					if self.pp > personalBest["pp"]:
-						# New best score
-						self.completed = 3
-						self.rankedScoreIncrease = self.score-personalBest["score"]
-						self.oldPersonalBest = personalBest["id"]
-					else:
-						self.completed = 2
-						self.rankedScoreIncrease = 0
-						self.oldPersonalBest = 0
-				elif b.rankedStatus == rankedStatuses.LOVED:
-					if self.score > personalBest["score"]:
-						# New best score
-						self.completed = 3
-						self.rankedScoreIncrease = self.score-personalBest["score"]
-						self.oldPersonalBest = personalBest["id"]
-					else:
-						self.completed = 2
-						self.rankedScoreIncrease = 0
-						self.oldPersonalBest = 0
+				# Make sure we don't have another score identical to this one
+				# TODO: time check
+				duplicate = glob.db.fetch("SELECT id FROM scores WHERE userid = %s AND beatmap_md5 = %s AND play_mode = %s AND score = %s LIMIT 1", [userID, self.fileMd5, self.gameMode, self.score])
+				if duplicate is not None:
+					# Found same score in db. Don't save this score.
+					self.completed = -1
+					return
 
-		log.debug("Completed status: {}".format(self.completed))
+				# No duplicates found.
+				# Get right "completed" value
+				personalBest = glob.db.fetch("SELECT id, score FROM scores WHERE userid = %s AND beatmap_md5 = %s AND play_mode = %s AND completed = 3 LIMIT 1", [userID, self.fileMd5, self.gameMode])
+				if personalBest is None:
+					# This is our first score on this map, so it's our best score
+					self.completed = 3
+					self.rankedScoreIncrease = self.score
+					self.oldPersonalBest = 0
+				else:
+					# Compare personal best's score with current score
+					self.rankedScoreIncrease = self.score-personalBest["score"]
+					self.oldPersonalBest = personalBest["id"]
+					self.completed = 3 if self.score > personalBest["score"] else 2
+			elif self.quit:
+				self.completed = 0
+			elif self.failed:
+				self.completed = 1
+		finally:
+			log.debug("Completed status: {}".format(self.completed))
 
 	def saveScoreInDB(self):
 		"""
