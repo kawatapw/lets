@@ -257,6 +257,7 @@ class score:
 					self.rankedScoreIncrease = self.pp
 					self.oldPersonalBest = 0
 				else:
+					self.calculatePP()
 					# Compare personal best's score with current score
 					self.rankedScoreIncrease = self.score-personalBest["pp"]
 					self.oldPersonalBest = personalBest["id"]
