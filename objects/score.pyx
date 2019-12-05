@@ -260,7 +260,7 @@ class score:
 					# Compare personal best's score with current score
 					self.rankedScoreIncrease = self.score-personalBest["pp"]
 					self.oldPersonalBest = personalBest["id"]
-					self.completed = 3 if self.score > personalBest["pp"] else 2
+					self.completed = 3 if self.pp > personalBest["pp"] else 2
 			elif self.quit:
 				self.completed = 0
 			elif self.failed:
