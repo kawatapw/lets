@@ -208,7 +208,7 @@ class score:
 			self.setCompletedStatus()
 
 
-	def getData(self, pp=False):
+	def getData(self, pp=True):
 		"""Return score row relative to this score for getscores"""
 		return "{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|1\n".format(
 			self.scoreID,
@@ -250,17 +250,17 @@ class score:
 
 				# No duplicates found.
 				# Get right "completed" value
-				personalBest = glob.db.fetch("SELECT id, score FROM scores WHERE userid = %s AND beatmap_md5 = %s AND play_mode = %s AND completed = 3 LIMIT 1", [userID, self.fileMd5, self.gameMode])
+				personalBest = glob.db.fetch("SELECT id, pp, score FROM scores WHERE userid = %s AND beatmap_md5 = %s AND play_mode = %s AND completed = 3 LIMIT 1", [userID, self.fileMd5, self.gameMode])
 				if personalBest is None:
 					# This is our first score on this map, so it's our best score
 					self.completed = 3
-					self.rankedScoreIncrease = self.score
+					self.rankedScoreIncrease = self.pp
 					self.oldPersonalBest = 0
 				else:
 					# Compare personal best's score with current score
-					self.rankedScoreIncrease = self.score-personalBest["score"]
+					self.rankedScoreIncrease = self.score-personalBest["pp"]
 					self.oldPersonalBest = personalBest["id"]
-					self.completed = 3 if self.score > personalBest["score"] else 2
+					self.completed = 3 if self.pp > personalBest["pp"] else 2
 			elif self.quit:
 				self.completed = 0
 			elif self.failed:
