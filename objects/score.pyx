@@ -259,7 +259,7 @@ class score:
 				else:
 					self.calculatePP()
 					# Compare personal best's score with current score
-					self.rankedScoreIncrease = self.score-personalBest["pp"]
+					self.rankedScoreIncrease = self.pp-personalBest["pp"]
 					self.oldPersonalBest = personalBest["id"]
 					self.completed = 3 if self.pp > personalBest["pp"] else 2
 			elif self.quit:
