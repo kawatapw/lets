@@ -221,9 +221,6 @@ class handler(requestsManager.asyncRequestHandler):
 			# Al centro qua hanno fatto una bella ristrututuitriazione
 			# Hanno mess le panghina le fondane iffiori
 			# LALALALALALALALALA
-			if s.score < 0 or s.score > (2 ** 63) - 1:
-				userUtils.ban(userID)
-				userUtils.appendNotes(userID, "Banned due to negative score (score submitter)")
 
 			# Make sure the score is not memed
 			if s.gameMode == gameModes.MANIA and s.score > 1000000:
