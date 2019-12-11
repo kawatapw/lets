@@ -141,10 +141,7 @@ class scoreboard:
 
 		# Sort and limit at the end
 		if self.mods <= -1 or self.mods & modsEnum.AUTOPLAY == 0:
-			# Order by score if we aren't filtering by mods or autoplay mod is disabled
-			order = "ORDER BY score DESC"
-		elif self.mods & modsEnum.AUTOPLAY > 0:
-			# Otherwise, filter by pp
+			# Order by pp
 			order = "ORDER BY pp DESC"
 		limit = "LIMIT 50"
 
