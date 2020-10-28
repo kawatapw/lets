@@ -22,7 +22,7 @@ def toDotTicks(unixTime):
 
 
 def _getRawReplayFailedLocal(scoreID):
-	with open(os.path.join(glob.conf["FAILED_REPLAYS_FOLDER"], "replay_{}.osr".format(scoreID)), "rb") as f:
+	with open(os.path.join(glob.conf["REPLAYS_FOLDER"], "replay_{}.osr".format(scoreID)), "rb") as f:
 		return f.read()
 
 
