@@ -4,3 +4,6 @@
 [submodule "secret"]
 	path = secret
 	url = https://github.com/kawatapw/secret
+[submodule "common"]
+	path = common
+	url = https://github.com/kawatapw/ripple-python-common
