@@ -1,9 +1,6 @@
 [submodule "pp/catch_the_pp"]
         path = pp/catch_the_pp
         url = https://zxq.co/ripple/catch-the-pp.git
-[submodule "common"]
-	path = common
-	url = https://github.com/ripple-shit/ripple-python-common
 [submodule "secret"]
 	path = secret
 	url = https://github.com/ripple-shit/secret
