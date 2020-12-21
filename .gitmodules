@@ -1,6 +1,3 @@
 [submodule "pp/catch_the_pp"]
         path = pp/catch_the_pp
         url = https://zxq.co/ripple/catch-the-pp.git
-[submodule "secret"]
-	path = secret
-	url = https://github.com/ripple-shit/secret
