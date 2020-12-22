@@ -178,28 +178,6 @@ class handler(requestsManager.asyncRequestHandler):
 				log.warning("Duplicated score detected, this is normal right after restarting the server")
 				return
 
-			# Restrict obvious cheaters
-			if s.pp >= 800 and s.gameMode == gameModes.STD and not restricted and not s.isRelax:
-				userUtils.restrict(userID)
-				userUtils.appendNotes(userID, "Restricted due to too high pp gain ({}pp)".format(s.pp))
-				log.cm(
-					"**{}** ({}) has been restricted due to too high pp gain **({}pp)**".format(username, userID, s.pp)
-				)
-
-			# Check notepad hack
-			if bmk is None and bml is None:
-				# No bmk and bml params passed, edited or super old client
-				#log.cm("{} ({}) most likely submitted a score from an edited client or a super old client".format(username, userID))
-				pass
-			elif bmk != bml and not restricted:
-				# bmk and bml passed and they are different, restrict the user
-				userUtils.restrict(userID)
-				userUtils.appendNotes(userID, "Restricted due to notepad hack")
-				log.cm(
-					"**{}** ({}) has been restricted due to notepad hack".format(username, userID)
-				)
-				return
-
 			# Right before submitting the score, get the personal best score object (we need it for charts)
 			if s.passed and s.oldPersonalBest > 0:
 				# We have an older personal best. Get its rank (try to get it from cache first)
@@ -227,17 +205,6 @@ class handler(requestsManager.asyncRequestHandler):
 			# and we can perform duplicates check through MySQL
 			log.debug("Resetting score lock key {}".format(lock_key))
 			glob.redis.delete(lock_key)
-
-			# Client anti-cheat flags
-			'''ignoreFlags = 4
-			if glob.debug:
-				# ignore multiple client flags if we are in debug mode
-				ignoreFlags |= 8
-			haxFlags = (len(scoreData[17])-len(scoreData[17].strip())) & ~ignoreFlags
-			if haxFlags != 0 and not restricted:
-				userHelper.restrict(userID)
-				userHelper.appendNotes(userID, "-- Restricted due to clientside anti cheat flag ({}) (cheated score id: {})".format(haxFlags, s.scoreID))
-				log.cm("**{}** ({}) has been restricted due clientside anti cheat flag **({})**".format(username, userID, haxFlags))'''
 
 			# Mi stavo preparando per scendere
 			# Mi stavo preparando per comprare i dolci
