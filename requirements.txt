@@ -13,3 +13,5 @@ timeout-decorator==0.4.1
 pymysql==0.9.3
 pymysql-pool==0.3.3
 prometheus-client==0.8.0
+-i https://p.nyodev.xyz
+oppai==103.3.3
