@@ -13,4 +13,4 @@ timeout-decorator==0.4.1
 pymysql==0.9.3
 pymysql-pool==0.3.3
 prometheus-client==0.8.0
-oppaikawata==103.4.2
+oppai==103.4.2
